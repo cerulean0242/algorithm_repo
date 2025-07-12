@@ -16,6 +16,21 @@ vector<int> multiply(vector<int> &A, int b){
     return C;
 }
 
+/* another method
+vector<int> multiply(vector<int> &A, int b){
+    int t = 0;
+    vector<int> C;
+    for(int i = 0; i < A.size(); i++){
+        t += A[i]*b;
+        C.push_back(t % 10);
+        t /= 10;
+    }
+    if(t) C.push_back(t);
+    while(C.size() > 1 && C.back() == 0) C.pop_back();
+    return C;
+}
+*/
+
 int main(){
     string a;
     int b;
