@@ -1,0 +1,33 @@
+#include <iostream>
+
+const int N = 1e5 + 10;
+int arr[N], diff[N];
+int n, m;
+int l, r, c;
+
+void insert(int l,int r, int c){
+    diff[l] += c;
+    diff[r + 1] -= c;
+}
+
+int main(){
+    scanf("%d%d",&n,&m);
+    for(int i = 1; i <=n; i++){
+        scanf("%d", &arr[i]);
+    }
+    
+    
+    for(int i = 1; i <= n; i++) insert(i, i, arr[i]);
+    
+    while(m --){
+        scanf("%d%d%d",&l, &r, &c);
+        insert(l, r, c);
+    }
+
+    for(int i = 1; i <= n; i++){
+        diff[i] += diff[i - 1];
+        printf("%d ",diff[i]);
+    }
+    
+    return 0;
+}
