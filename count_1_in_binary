@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+int arr[N];
+int n;
+
+int lowbit(int x){
+    return x&-x;
+}
+
+int main(){
+    scanf("%d", &n);
+    for(int i = 0; i < n; i++) scanf("%d", &arr[i]);
+    for(int i = 0; i < n; i++){
+        int res = 0;
+        while(arr[i]){
+            arr[i] -= lowbit(arr[i]);
+            res++;
+        }
+        cout << res <<" "; 
+    }
+    
+    return 0;
+}
