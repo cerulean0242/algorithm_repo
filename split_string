@@ -1,0 +1,15 @@
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+int main(){
+    char s[1000];
+    cin.getline(s,sizeof(s));
+    for(int i = 0; i < strlen(s); i++){
+        while(s[i] != ' ') {
+            cout<< s[i++];
+        }
+        cout << endl;
+    }
+}
