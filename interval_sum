@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+typedef pair<int, int> int2;
+
+int n;
+vector<int2> interval;
+vector<int2> res;
+
+int main(){
+    int l, r;
+    cin >> n;
+    for(int i = 0; i <= n; i++){
+        cin >> l >> r;
+        interval.push_back({l, r});
+    }
+    
+    sort(interval.begin(), interval.end());
+    
+    int st = -2e9, end = -2e9;
+    for(auto item: interval){
+        if(end < item.first){
+            if(st != -2e9) res.push_back({st, end});
+            st = item.first, end = item.second;
+        }else{
+            end = max(end, item.second);
+        }
+    }
+    
+    if(st != -2e9) res.push_back({st, end});
+    
+    cout << res.size();
+    return 0;
+}
