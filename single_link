@@ -1,0 +1,54 @@
+#include <iostream>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int value[N], next_ptr[N];
+
+char op;
+int head, index, n, a, b;
+
+void init(){
+    head = -1;
+    index = 1;
+}
+
+void add_to_head(int x){
+    value[index] = x;
+    next_ptr[index] = head;
+    head = index ++;
+}
+
+void add(int k, int x){
+    value[index] = x;
+    next_ptr[index] = next_ptr[k];
+    next_ptr[k] = index++;
+}
+
+void remove(int k){
+    next_ptr[k] = next_ptr[next_ptr[k]];
+}
+
+int main(){
+    init();
+    cin >> n;
+    while(n--){
+        cin >> op;
+        if(op == 'H'){
+            cin >> a;
+            add_to_head(a);
+        }else if(op == 'I'){
+            cin >> a >> b;
+            add(a, b);
+        }else{
+            cin >> a;
+            if(!a) head = next_ptr[head];
+            else remove(a);
+        }
+    }
+    
+    for(int i = head; i != -1; i = next_ptr[i]) cout << value[i] <<" ";
+    
+    return 0;
+}
