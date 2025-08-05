@@ -1,1 +1,61 @@
+#include <iostream>
 
+using namespace std;
+
+const int N = 1e5 + 10;
+
+string op;
+
+int n, a, b, index;
+
+int value[N], left_ptr[N], right_ptr[N];
+
+void init(){
+    left_ptr[1] = 0;
+    right_ptr[0] = 1;
+    index = 2;
+}
+
+void insert(int k, int x){
+    value[index] = x;
+    left_ptr[right_ptr[k]] = index;
+    right_ptr[index] = right_ptr[k];
+    right_ptr[k] = index;
+    left_ptr[index] = k;
+    index++;
+}
+
+void remove(int k){
+    right_ptr[left_ptr[k]] = right_ptr[k];
+    left_ptr[right_ptr[k]] = left_ptr[k];
+}
+
+int main(){
+    
+    cin >> n;
+    init();
+    
+    while(n --){
+        cin >> op;
+        if(op == "L"){
+            cin >> a;
+            insert(0,a);
+        } else if(op == "R"){
+            cin >> a;
+            insert(left_ptr[1],a);
+        }else if(op == "IL"){
+            cin >> a >> b;
+            insert(left_ptr[a + 1], b);
+        }else if(op == "IR"){
+            cin >> a >> b;
+            insert(a + 1, b);
+        }else{
+            cin >> a;
+            remove(a + 1);
+        }
+    }
+    
+    for(int i = right_ptr[0]; i != 1; i = right_ptr[i]) cout << value[i] << " ";
+    
+    return 0;
+}
