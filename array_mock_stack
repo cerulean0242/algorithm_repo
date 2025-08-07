@@ -1,2 +1,52 @@
+#include<iostream>
 
-1
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int stack[N];
+
+int n, a, index;
+
+string op;
+
+void init(){
+    index = 1;
+}
+
+void push(int x){
+    stack[index ++] = x;
+}
+
+void pop(){
+    index --;
+}
+
+void empty(){
+    if(index > 1) cout << "NO" << endl;
+    else cout << "YES" << endl;
+}
+
+void query(){
+    cout << stack[index -1] << endl;
+}
+
+int main(){
+    init();
+    cin >> n;
+    while(n --){
+        cin >> op;
+        if(op == "push"){
+            cin >> a;
+            push(a);
+        }else if(op == "pop"){
+            pop();
+        } else if(op == "empty"){
+            empty();
+        }else {
+            query();
+        }
+        
+    }
+    
+}
