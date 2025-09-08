@@ -1,1 +1,45 @@
-1
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+int arr[N];
+int head, tail;
+
+void push(int x){
+    arr[tail++] = x;
+}
+
+void pop(){
+    head++;
+}
+
+void empty(){
+    if(head != tail) cout << "NO" << endl;
+    else cout << "YES" << endl;
+}
+
+int query(){
+    cout << arr[head] << endl;
+}
+
+int main(){
+    int n;
+    cin >> n;
+    while(n --){
+        string op;
+
+        cin >> op;
+        if(op == "push") {
+            int x;
+            cin >> x;
+            push(x);
+        }
+        else if(op == "pop") pop();
+        else if(op == "empty") empty();
+        else query();
+    }
+    
+    return 0;
+}
